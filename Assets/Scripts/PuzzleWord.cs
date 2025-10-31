@@ -5,12 +5,12 @@
 
 // public class WordPuzzle : MonoBehaviour
 // {
-//     public List<Button> letterButtons; // حطي الأزرار هنا من الـInspector
+//     public List<Button> letterButtons;
 //     private string targetPhrase = "PICK UP YOUR GLASSES";
 //     private string currentInput = "";
 
-//     public TextMeshProUGUI displayText; // عشان نعرض اللي كتبه اللاعب
-//     public GameObject rewardObject; // مثلاً النظارات (خليها مخفية بالبداية)
+//     public TextMeshProUGUI displayText; 
+//     public GameObject rewardObject; 
 
 //     void Start()
 //     {
@@ -36,7 +36,7 @@
 //             {
 //                 displayText.text = "✅ Correct!";
 //                 if (rewardObject != null)
-//                     rewardObject.SetActive(true); // تظهر النظارات
+//                     rewardObject.SetActive(true); 
 //             }
 //             else
 //             {
