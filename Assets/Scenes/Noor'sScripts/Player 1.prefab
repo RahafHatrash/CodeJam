@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 5013256934888958244}
   - component: {fileID: 8669425895085722553}
   - component: {fileID: 1422819828336069762}
+  - component: {fileID: 1918564513977991944}
+  - component: {fileID: 1991232699703206188}
   m_Layer: 0
   m_Name: Player 1
   m_TagString: Player
@@ -109,10 +111,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   moveSpeed: 5
   jumpForce: 17
-  groundCheck: {fileID: 910327688783692223}
-  groundLayer:
+  spriteFacesRightByDefault: 1
+  groundLayers:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 4294967295
 --- !u!50 &5013256934888958244
 Rigidbody2D:
   serializedVersion: 5
@@ -199,10 +201,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ChoiceHandler
   nextSceneName: Noor'sScene
-  sceneA: BlueEnding
-  sceneB: RedEnding
+  BlueEnding: BlueEnding
+  RedEnding: RedEnding
   BlueEndingTag: BlueEnding
   RedEndingTag: RedEnding
+--- !u!95 &1918564513977991944
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391500259597044054}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1991232699703206188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391500259597044054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e963b1759314f184fba0444524d36a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerRespawn
+  fallThreshold: -10
 --- !u!1 &7527077550477108754
 GameObject:
   m_ObjectHideFlags: 0
