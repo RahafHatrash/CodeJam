@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PuzzleImageSplitter : MonoBehaviour
 {
@@ -8,9 +9,7 @@ public class PuzzleImageSplitter : MonoBehaviour
     public int cols = 3;
     public GameObject piecePrefab; 
     public RectTransform puzzlePanel;
-
-    [Header("SIZE OF EACH PIECE")]
-    public Vector2 pieceSize = new Vector2(500, 200); 
+    public Vector2 pieceSize = new Vector2(150, 150);
 
     void Start()
     {
@@ -22,16 +21,39 @@ public class PuzzleImageSplitter : MonoBehaviour
         float pieceWidth = fullImage.texture.width / cols;
         float pieceHeight = fullImage.texture.height / rows;
 
-        int totalPieces = rows * cols;
-        int piecesPerRow = Mathf.CeilToInt(totalPieces / 2f);
+        List<Vector2> positions = new List<Vector2>();
+        float spacing = 10f;
+        float totalWidth = (cols * (pieceSize.x + spacing)) - spacing;
+        float totalHeight = (rows * (pieceSize.y + spacing)) - spacing;
 
-        float spacing = 20f; 
-        float startY = -puzzlePanel.rect.height / 2 + pieceSize.y / 2 + 50f; 
-        float totalWidth = (piecesPerRow * (pieceSize.x + spacing)) - spacing;
         float startX = -totalWidth / 2 + pieceSize.x / 2;
+        float startY = totalHeight / 2 - pieceSize.y / 2;
 
-        int pieceIndex = 0;
+        // تخزين جميع المواقع الصحيحة
+        for (int r = 0; r < rows; r++)
+        {
+            for (int c = 0; c < cols; c++)
+            {
+                positions.Add(new Vector2(
+                    startX + (c * (pieceSize.x + spacing)),
+                    startY - (r * (pieceSize.y + spacing))
+                ));
+            }
+        }
 
+        // نخلط المواقع عشوائياً
+        List<Vector2> shuffledPositions = new List<Vector2>(positions);
+        for (int i = 0; i < shuffledPositions.Count; i++)
+        {
+            Vector2 temp = shuffledPositions[i];
+            int randomIndex = Random.Range(i, shuffledPositions.Count);
+            shuffledPositions[i] = shuffledPositions[randomIndex];
+            shuffledPositions[randomIndex] = temp;
+        }
+
+        int index = 0;
+
+        // انشاء القطع
         for (int r = 0; r < rows; r++)
         {
             for (int c = 0; c < cols; c++)
@@ -51,21 +73,15 @@ public class PuzzleImageSplitter : MonoBehaviour
                 img.preserveAspect = true;
 
                 RectTransform rt = piece.GetComponent<RectTransform>();
-                rt.sizeDelta = pieceSize; // ← 500 × 200
+                rt.sizeDelta = pieceSize;
 
-                int rowPlacement = pieceIndex < piecesPerRow ? 0 : 1;
-                int colIndex = rowPlacement == 0 ? pieceIndex : pieceIndex - piecesPerRow;
-
-                float xPos = startX + (colIndex * (pieceSize.x + spacing));
-                float yPos = startY + (rowPlacement * (pieceSize.y + spacing));
-
-                rt.anchoredPosition = new Vector2(xPos, yPos);
+                // توضع القطعة في موقع عشوائي
+                rt.anchoredPosition = shuffledPositions[index];
+                index++;
 
                 var drag = piece.GetComponent<DragDropPiece>();
                 if (drag != null)
                     drag.correctSlotName = $"Slot_{r}_{c}";
-
-                pieceIndex++;
             }
         }
     }
