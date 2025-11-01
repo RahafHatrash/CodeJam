@@ -251,6 +251,7 @@ MonoBehaviour:
   audioSource: {fileID: 11297521}
   CameraSound: {fileID: 8300000, guid: 3a89d5c7931100541a881ecf05b0f3e4, type: 3}
   SwirlSound: {fileID: 8300000, guid: 3a89d5c7931100541a881ecf05b0f3e4, type: 3}
+  nextSceneName: Hala'sScene
 --- !u!95 &11297523
 Animator:
   serializedVersion: 7
